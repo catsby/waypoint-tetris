@@ -181,15 +181,10 @@ app "tetris" {
       use "docker-pull" {
         image = var.image
         tag   = var.tag
-        # encoded_auth = base64encode(
-        #   jsonencode({
-        # username = var.registry_username,
-        # password = var.registry_password
-        # })
-        # )
         auth {
-          username = var.registry_username
-          password = var.registry_password
+        auth = base64encode("${var.registry_username}:${var.registry_password}")
+          # username = var.registry_username
+          # password = var.registry_password
         }
       }
     }
