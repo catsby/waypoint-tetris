@@ -182,7 +182,7 @@ app "tetris" {
         image = var.image
         tag   = var.tag
         auth {
-          auth = base64encode("${var.registry_username}:${var.registry_password}")
+          header = base64encode("${var.registry_username}:${var.registry_password}")
           # username = var.registry_username
           # password = var.registry_password
         }
