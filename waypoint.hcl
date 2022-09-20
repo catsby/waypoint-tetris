@@ -53,7 +53,7 @@ pipeline "simple-nested" {
   }
 
   step "deploy-prod" {
-    workspace = "prod"
+    workspace = "production"
 
     pipeline "deploy-prod" {
       step "build" {
@@ -221,7 +221,7 @@ app "tetris" {
   release {
     use "kubernetes" {
       load_balancer = true
-      port          = 3000
+      port          = var.port
     }
   }
 }
@@ -270,4 +270,13 @@ variable "regcred_secret" {
   default     = "regcred"
   type        = string
   description = "The existing secret name inside Kubernetes for authenticating to the container registry"
+}
+
+variable "port" {
+  type = number
+  default = {
+    "default"    = 3000
+    "test" = 8080
+    "production" = 9090
+  }[workspace.name]
 }
