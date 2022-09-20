@@ -105,7 +105,7 @@ pipeline "release" {
 
         use "exec" {
           command = "curl"
-          args    = ["-v", "example.com"]
+          args    = ["-v", "http://192.168.147.119:3000"]
         }
       }
     }
@@ -116,7 +116,7 @@ pipeline "release" {
 
     use "exec" {
       command = "curl"
-      args    = ["-v", "example.com"]
+      args    = ["-v", "http://192.168.147.119:3000"]
     }
   }
 
@@ -140,7 +140,7 @@ pipeline "release" {
 
         use "exec" {
           command = "curl"
-          args    = ["-v", "example.com"]
+          args    = ["-v", "http://192.168.147.119:3000"]
         }
       }
 
@@ -168,7 +168,7 @@ runner {
   enabled = true
 
   data_source "git" {
-    url  = "https://github.com/briancain/waypoint-tetris.git"
+    url  = "https://github.com/catsby/waypoint-tetris.git"
     path = ""
   }
 }
