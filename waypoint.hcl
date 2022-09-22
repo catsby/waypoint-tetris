@@ -163,8 +163,6 @@ pipeline "release" {
 }
 
 runner {
-  //profile = "kubernetes-bootstrap-profile"
-
   enabled = true
 
   data_source "git" {
@@ -234,13 +232,15 @@ app "tetris" {
 variable "image" {
   # free tier, old container registry
   #default     = "bcain.jfrog.io/default-docker-virtual/tetris"
-  default     = "team-waypoint-dev-docker-local.artifactory.hashicorp.engineering/tetris"
+  # default     = "team-waypoint-dev-docker-local.artifactory.hashicorp.engineering/tetris"
+  default     = "ttl.sh/ctstetris"
   type        = string
   description = "Image name for the built image in the Docker registry."
 }
 
 variable "tag" {
-  default     = "latest"
+  # default     = "latest"
+  default     = "1h"
   type        = string
   description = "Image tag for the image"
 }
