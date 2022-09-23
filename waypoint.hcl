@@ -251,8 +251,8 @@ variable "image" {
 }
 
 variable "tag" {
-  # default     = "latest"
-  default     = "1h"
+  default     = "latest"
+  # default     = "1h"
   type        = string
   description = "Image tag for the image"
 }
