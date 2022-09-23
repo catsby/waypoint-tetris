@@ -244,8 +244,8 @@ app "tetris" {
 variable "image" {
   # free tier, old container registry
   #default     = "bcain.jfrog.io/default-docker-virtual/tetris"
-  # default     = "team-waypoint-dev-docker-local.artifactory.hashicorp.engineering/tetris"
-  default     = "ttl.sh/ctstetris"
+  default     = "team-waypoint-dev-docker-local.artifactory.hashicorp.engineering/tetris"
+  # default     = "ttl.sh/ctstetris"
   type        = string
   description = "Image name for the built image in the Docker registry."
 }
