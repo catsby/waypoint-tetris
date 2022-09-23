@@ -184,12 +184,12 @@ app "tetris" {
         #   username = var.registry_username
         #   password = var.registry_password
         # }
-        encoded_auth = base64encode(
-          jsonencode({
-            username = var.registry_username,
-            password = var.registry_password
-          })
-        )
+        # encoded_auth = base64encode(
+        #   jsonencode({
+        #     username = var.registry_username,
+        #     password = var.registry_password
+        #   })
+        # )
       }
     }
 
@@ -200,12 +200,12 @@ app "tetris" {
         # username = var.registry_username
         # password = var.registry_password
         local    = var.registry_local
-        encoded_auth = base64encode(
-          jsonencode({
-            username = var.registry_username,
-            password = var.registry_password
-          })
-        )
+        # encoded_auth = base64encode(
+        #   jsonencode({
+        #     username = var.registry_username,
+        #     password = var.registry_password
+        #   })
+        # )
       }
     }
   }
@@ -244,15 +244,15 @@ app "tetris" {
 variable "image" {
   # free tier, old container registry
   #default     = "bcain.jfrog.io/default-docker-virtual/tetris"
-  default     = "team-waypoint-dev-docker-local.artifactory.hashicorp.engineering/tetris"
-  # default     = "ttl.sh/ctstetris"
+  # default     = "team-waypoint-dev-docker-local.artifactory.hashicorp.engineering/tetris"
+  default     = "ttl.sh/ctstetris"
   type        = string
   description = "Image name for the built image in the Docker registry."
 }
 
 variable "tag" {
-  default     = "latest"
-  # default     = "1h"
+  # default     = "latest"
+  default     = "1h"
   type        = string
   description = "Image tag for the image"
 }
