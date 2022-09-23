@@ -179,11 +179,17 @@ app "tetris" {
       use "docker-pull" {
         image = var.image
         tag   = var.tag
-        auth {
-          # header = base64encode("${var.registry_username}:${var.registry_password}")
-          username = var.registry_username
-          password = var.registry_password
-        }
+        # auth {
+        #   # header = base64encode("${var.registry_username}:${var.registry_password}")
+        #   username = var.registry_username
+        #   password = var.registry_password
+        # }
+        encoded_auth = base64encode(
+          jsonencode({
+            username = var.registry_username,
+            password = var.registry_password
+          })
+        )
       }
     }
 
@@ -191,9 +197,15 @@ app "tetris" {
       use "docker" {
         image    = var.image
         tag      = var.tag
-        username = var.registry_username
-        password = var.registry_password
+        # username = var.registry_username
+        # password = var.registry_password
         local    = var.registry_local
+        encoded_auth = base64encode(
+          jsonencode({
+            username = var.registry_username,
+            password = var.registry_password
+          })
+        )
       }
     }
   }
