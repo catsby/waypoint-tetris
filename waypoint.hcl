@@ -33,6 +33,16 @@ pipeline "single" {
       args    = ["lets try a nested pipeline"]
     }
   }
+
+  step "healthz" {
+    # image_url = "localhost:5000/waypoint-odr:latest"
+    image_url = "curlimages/curl:latest"
+
+    use "exec" {
+      command = "curl"
+      args    = ["-v", "http://192.168.147.119:3000"]
+    }
+  }
 }
 
 pipeline "simple-nested" {
@@ -244,8 +254,8 @@ app "tetris" {
       }
 
       autoscale {
-        min_replicas = 2
-        max_replicas = 5
+        min_replicas = 1
+        max_replicas = 2
         cpu_percent  = 50
       }
     }
