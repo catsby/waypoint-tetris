@@ -46,15 +46,24 @@ pipeline "single" {
 }
 
 pipeline "simple-nested" {
-  step "here-we-go" {
+  step "begin-release" {
     # image_url = "localhost:5000/waypoint-odr:latest"
     image_url = "curlimages/curl:latest"
 
     use "exec" {
       command = "echo"
-      args    = ["lets try a nested pipeline"]
+      args    = ["new build begining..."]
     }
   }
+  # step "here-we-go" {
+  #   # image_url = "localhost:5000/waypoint-odr:latest"
+  #   image_url = "curlimages/curl:latest"
+
+  #   use "exec" {
+  #     command = "echo"
+  #     args    = ["lets try a nested pipeline"]
+  #   }
+  # }
 
   step "deploy" {
     workspace = "test"
@@ -91,6 +100,16 @@ pipeline "simple-nested" {
         use "release" {
         }
       }
+    }
+  }
+
+  step "begin-release" {
+    # image_url = "localhost:5000/waypoint-odr:latest"
+    image_url = "curlimages/curl:latest"
+
+    use "exec" {
+      command = "echo"
+      args    = ["Test and Production updated!"]
     }
   }
 }
@@ -323,6 +342,6 @@ variable "port" {
   default = {
     "default"    = 3000
     "test" = 8080
-    "production" = 5000
+    "production" = 3030
   }[workspace.name]
 }
