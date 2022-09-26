@@ -25,7 +25,6 @@ pipeline "up" {
 
 pipeline "single" {
   step "here-we-go" {
-    # image_url = "localhost:5000/waypoint-odr:latest"
     image_url = "curlimages/curl:latest"
 
     use "exec" {
@@ -35,19 +34,17 @@ pipeline "single" {
   }
 
   step "healthz" {
-    # image_url = "localhost:5000/waypoint-odr:latest"
     image_url = "curlimages/curl:latest"
 
     use "exec" {
       command = "curl"
-      args    = ["-v", "http://192.168.147.119:3000"]
+      args    = ["-v", "localhost:3000"]
     }
   }
 }
 
 pipeline "multi-deploy" {
   step "begin-release" {
-    # image_url = "localhost:5000/waypoint-odr:latest"
     image_url = "curlimages/curl:latest"
 
     use "exec" {
@@ -55,15 +52,6 @@ pipeline "multi-deploy" {
       args    = ["new build begining..."]
     }
   }
-  # step "here-we-go" {
-  #   # image_url = "localhost:5000/waypoint-odr:latest"
-  #   image_url = "curlimages/curl:latest"
-
-  #   use "exec" {
-  #     command = "echo"
-  #     args    = ["lets try a nested pipeline"]
-  #   }
-  # }
 
   step "deploy" {
     workspace = "test"
@@ -104,7 +92,6 @@ pipeline "multi-deploy" {
   }
 
   step "notify-release" {
-    # image_url = "localhost:5000/waypoint-odr:latest"
     image_url = "curlimages/curl:latest"
 
     use "exec" {
@@ -129,7 +116,6 @@ pipeline "release" {
         }
       }
       step "scan-then-sign" {
-        # image_url = "localhost:5000/waypoint-odr:latest"
         image_url = "curlimages/curl:latest"
 
         use "exec" {
@@ -144,24 +130,22 @@ pipeline "release" {
       }
 
       step "healthz" {
-        # image_url = "localhost:5000/waypoint-odr:latest"
         image_url = "curlimages/curl:latest"
 
         use "exec" {
           command = "curl"
-          args    = ["-v", "http://192.168.147.119:3000"]
+          args    = ["-v", "localhost:3000"]
         }
       }
     }
   }
 
   step "on-to-prod" {
-    # image_url = "localhost:5000/waypoint-odr:latest"
     image_url = "curlimages/curl:latest"
 
     use "exec" {
       command = "curl"
-      args    = ["-v", "http://192.168.147.119:3000"]
+      args    = ["-v", "localhost:3000"]
     }
   }
 
@@ -181,12 +165,11 @@ pipeline "release" {
       }
 
       step "healthz" {
-        # image_url = "localhost:5000/waypoint-odr:latest"
         image_url = "curlimages/curl:latest"
 
         use "exec" {
           command = "curl"
-          args    = ["-v", "http://192.168.147.119:3000"]
+          args    = ["-v", "localhost:3000"]
         }
       }
 
@@ -198,7 +181,6 @@ pipeline "release" {
   }
 
   step "notify-release" {
-    # image_url = "localhost:5000/waypoint-odr:latest"
     image_url = "curlimages/curl:latest"
 
     use "exec" {
@@ -222,23 +204,18 @@ app "tetris" {
   build {
     use "docker" {
     }
-    # workspace "production" {
-    #   use "docker-pull" {
-    #     image = var.image
-    #     tag   = var.tag
-    #     auth {
-    #       # header = base64encode("${var.registry_username}:${var.registry_password}")
-    #       username = var.registry_username
-    #       password = var.registry_password
-    #     }
-    #     # encoded_auth = base64encode(
-    #     #   jsonencode({
-    #     #     username = var.registry_username,
-    #     #     password = var.registry_password
-    #     #   })
-    #     # )
-    #   }
-    # }
+    workspace "staging" {
+      use "docker-pull" {
+        image = var.image
+        tag   = var.tag
+        encoded_auth = base64encode(
+          jsonencode({
+            username = var.registry_username,
+            password = var.registry_password
+          })
+        )
+      }
+    }
 
     registry {
       use "docker" {
@@ -247,12 +224,6 @@ app "tetris" {
         username = var.registry_username
         password = var.registry_password
         local    = var.registry_local
-        # encoded_auth = base64encode(
-        #   jsonencode({
-        #     username = var.registry_username,
-        #     password = var.registry_password
-        #   })
-        # )
       }
     }
   }
@@ -289,18 +260,13 @@ app "tetris" {
 }
 
 variable "image" {
-  # free tier, old container registry
-  #default     = "bcain.jfrog.io/default-docker-virtual/tetris"
   default     = "team-waypoint-dev-docker-local.artifactory.hashicorp.engineering/tetris"
-  # default     = "ttl.sh/ctstetris"
-  # default     = "catsby/tetris"
   type        = string
   description = "Image name for the built image in the Docker registry."
 }
 
 variable "tag" {
   default     = "latest"
-  # default     = "1h"
   type        = string
   description = "Image tag for the image"
 }
