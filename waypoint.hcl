@@ -36,7 +36,7 @@ pipeline "single" {
 
 pipeline "simple-nested" {
   step "here-we-go" {
-    //image_url = "localhost:5000/waypoint-odr:latest"
+    image_url = "localhost:5000/waypoint-odr:latest"
 
     use "exec" {
       command = "echo"
@@ -98,7 +98,7 @@ pipeline "release" {
         }
       }
       step "scan-then-sign" {
-        //image_url = "localhost:5000/waypoint-odr:latest"
+        image_url = "localhost:5000/waypoint-odr:latest"
 
         use "exec" {
           command = "echo"
@@ -112,7 +112,7 @@ pipeline "release" {
       }
 
       step "healthz" {
-        //image_url = "localhost:5000/waypoint-odr:latest"
+        image_url = "localhost:5000/waypoint-odr:latest"
 
         use "exec" {
           command = "curl"
@@ -123,7 +123,7 @@ pipeline "release" {
   }
 
   step "on-to-prod" {
-    //image_url = "localhost:5000/waypoint-odr:latest"
+    image_url = "localhost:5000/waypoint-odr:latest"
 
     use "exec" {
       command = "curl"
@@ -147,7 +147,7 @@ pipeline "release" {
       }
 
       step "healthz" {
-        //image_url = "localhost:5000/waypoint-odr:latest"
+        image_url = "localhost:5000/waypoint-odr:latest"
 
         use "exec" {
           command = "curl"
@@ -163,7 +163,7 @@ pipeline "release" {
   }
 
   step "notify-release" {
-    //image_url = "localhost:5000/waypoint-odr:latest"
+    image_url = "localhost:5000/waypoint-odr:latest"
 
     use "exec" {
       command = "echo"
