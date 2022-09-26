@@ -45,7 +45,7 @@ pipeline "single" {
   }
 }
 
-pipeline "simple-nested" {
+pipeline "multi-deploy" {
   step "begin-release" {
     # image_url = "localhost:5000/waypoint-odr:latest"
     image_url = "curlimages/curl:latest"
