@@ -323,6 +323,6 @@ variable "port" {
   default = {
     "default"    = 3000
     "test" = 8080
-    "production" = 9090
+    "production" = 5000
   }[workspace.name]
 }
