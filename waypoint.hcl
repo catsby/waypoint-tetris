@@ -39,7 +39,7 @@ pipeline "single" {
     use "exec" {
       command = "curl"
       # args    = ["-I", "192.168.147.119:3030"]
-      args    = ["-I", "192.168.147.119:3030 | head -n 1 | cut '-d ' '-f2'"]
+      args    = ["-I", "192.168.147.119:3030", " | head -n 1 | cut '-d ' '-f2'"]
     }
   }
 }
