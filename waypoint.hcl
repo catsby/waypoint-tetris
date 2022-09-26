@@ -23,6 +23,17 @@ pipeline "up" {
   }
 }
 
+pipeline "single" {
+  step "here-we-go" {
+    //image_url = "localhost:5000/waypoint-odr:latest"
+
+    use "exec" {
+      command = "echo"
+      args    = ["lets try a nested pipeline"]
+    }
+  }
+}
+
 pipeline "simple-nested" {
   step "here-we-go" {
     //image_url = "localhost:5000/waypoint-odr:latest"
