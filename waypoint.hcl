@@ -38,7 +38,7 @@ pipeline "single" {
 
     use "exec" {
       command = "curl"
-      args    = ["-v", "192.168.147.119:3000"]
+      args    = ["-Is", "192.168.147.119:3000"]
     }
   }
 }
