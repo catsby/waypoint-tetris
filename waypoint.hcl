@@ -4,7 +4,7 @@ app "tetris" {
   build {
     use "docker" {
     }
-    workspace "staging" {
+    workspace "production" {
       use "docker-pull" {
         image = var.image
         tag   = var.tag
