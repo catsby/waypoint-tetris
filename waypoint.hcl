@@ -8,7 +8,7 @@ app "tetris" {
       use "docker-pull" {
         image = var.image
         tag   = var.tag
-        disable_entrypoint = true
+        disable_entrypoint = var.ceb
         encoded_auth = base64encode(
           jsonencode({
             username = var.registry_username,
@@ -58,6 +58,12 @@ app "tetris" {
       port          = var.port
     }
   }
+}
+
+variable "ceb" {
+  default     = false
+  type        = bool
+  description = "disable ceb or not"
 }
 
 variable "image" {
