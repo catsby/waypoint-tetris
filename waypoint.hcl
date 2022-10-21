@@ -20,10 +20,10 @@ app "tetris" {
 
     registry {
       use "docker" {
-        image    = var.image
+        image    = var.push_image
         tag      = var.tag
-        username = var.registry_username
-        password = var.registry_password
+        username = var.push_registry_username
+        password = var.push_registry_password
         local    = var.registry_local
       }
     }
