@@ -72,6 +72,12 @@ variable "image" {
   description = "Image name for the built image in the Docker registry."
 }
 
+variable "push_image" {
+  default     = "registry.hub.docker.com/catsby/tetris"
+  type        = string
+  description = "Image name for the built image in the Docker registry."
+}
+
 variable "tag" {
   default     = "latest"
   type        = string
@@ -101,7 +107,21 @@ variable "registry_password" {
   })
   type        = string
   sensitive   = true
-  description = "password for registry" // don't hack me plz
+  description = "password for registry"
+}
+
+variable "push_registry_username" {
+  default = "catsby"
+  type        = string
+  sensitive   = true
+  description = "username for container push registry"
+}
+
+variable "push_registry_password" {
+  default = "nope"
+  type        = string
+  sensitive   = true
+  description = "password for push registry"
 }
 
 variable "regcred_secret" {
