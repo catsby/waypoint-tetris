@@ -241,6 +241,46 @@ pipeline "multi-deploy" {
   }
 }
 
+pipeline "prod-promote" {
+  step "build" {
+    use "build" {
+    }
+  }
+
+  step "promote" {
+    workspace = "production"
+
+    pipeline "deploy-prod" {
+      step "build" {
+        use "build" {
+        }
+      }
+      step "scan-then-sign" {
+        image_url = "curlimages/curl:latest"
+
+        use "exec" {
+          command = "echo"
+          args    = ["singing some artifacts!!"]
+        }
+      }
+
+      step "deploy" {
+        use "deploy" {
+        }
+      }
+
+      step "healthz" {
+        image_url = "curlimages/curl:latest"
+
+        use "exec" {
+          command = "curl"
+          args    = ["-v", "localhost:3030"]
+        }
+      }
+    }
+  }
+}
+
 pipeline "release" {
   step "build" {
     use "build" {
