@@ -57,6 +57,12 @@ app "tetris" {
       load_balancer = true
       port          = var.port
     }
+    workspace "production" {
+      use "kubernetes" {
+        load_balancer = true
+        port          = "3030"
+      }
+    }
   }
 }
 
