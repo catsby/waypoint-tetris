@@ -91,20 +91,14 @@ variable "registry_local" {
 }
 
 variable "registry_username" {
-  default = dynamic("vault", {
-    path = "secret/data/registry"
-    key  = "/data/registry_username"
-  })
+  default = "test"
   type        = string
   sensitive   = true
   description = "username for container registry"
 }
 
 variable "registry_password" {
-  default = dynamic("vault", {
-    path = "secret/data/registry"
-    key  = "/data/registry_password"
-  })
+  default = "test"
   type        = string
   sensitive   = true
   description = "password for registry"
